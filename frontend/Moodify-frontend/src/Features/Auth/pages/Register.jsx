@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import "../../../style/Auth.css";
 
 const Register = () => {
 
@@ -20,42 +21,46 @@ const Register = () => {
   };
 
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
-      
-      <form onSubmit={handlesubmit} style={{display:"flex",flexDirection:"column",gap:"10px",width:"300px"}}>
+    <div className="app-container">
+      <div className="glass-panel" style={{ maxWidth: "400px", width: "100%" }}>
+        <h1 className="heading-title" style={{ fontSize: "2rem", marginBottom: "1rem" }}>Create Account</h1>
+        <p style={{ color: "var(--text-muted)", textAlign: "center", marginBottom: "2rem" }}>Join Moodify today</p>
         
-        <h2>Register</h2>
+        <form onSubmit={handlesubmit} style={{ display: "flex", flexDirection: "column" }}>
+          
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e)=>setusername(e.target.value)}
+            required
+          />
 
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e)=>setusername(e.target.value)}
-          required
-        />
+          <input
+            className="input-field"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e)=>setemail(e.target.value)}
+            required
+          />
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e)=>setemail(e.target.value)}
-          required
-        />
+          <input
+            className="input-field"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e)=>setpassword(e.target.value)}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setpassword(e.target.value)}
-          required
-        />
+          <button className="btn-primary" type="submit" style={{ marginTop: "1rem" }}>
+            {loading ? "Registering..." : "Register"}
+          </button>
 
-        <button type="submit">
-          {loading ? "Registering..." : "Register"}
-        </button>
-
-      </form>
-
+        </form>
+      </div>
     </div>
   );
 };

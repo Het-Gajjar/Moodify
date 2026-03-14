@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
+import "../../../style/FaceEmotion.css";
 
-const FaceEmotion = () => {
+const FaceEmotion = ({ onCapture }) => {
   const videoRef = useRef(null);
 
   const [liveEmotion, setLiveEmotion] = useState("Detecting...");
@@ -75,10 +76,10 @@ const FaceEmotion = () => {
 
         let detectedEmotion = "Neutral";
 
-        if (smile > 0.8) detectedEmotion = "Happy 😊";
+        if (smile > 0.8) detectedEmotion = "happy";
         else if (mouthOpen > 0.6 && browRaise > 0.6)
-          detectedEmotion = "Surprised 😲";
-        else if (sad > 0.05) detectedEmotion = "Sad 😢";
+          detectedEmotion = "surpised";
+        else if (sad > 0.05) detectedEmotion = "Sad";
 
         setLiveEmotion(detectedEmotion);
       }
@@ -89,28 +90,39 @@ const FaceEmotion = () => {
 
   const captureEmotion = () => {
     setCapturedEmotion(liveEmotion);
+    onCapture(liveEmotion);
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h2>Face Emotion Detection</h2>
+    <div style={{ textAlign: "center", width: "100%" }}>
+      <h2 style={{ marginBottom: "1rem", color: "var(--text-main)", fontWeight: 500 }}>Detection Camera</h2>
 
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        width="640"
-        height="480"
-        style={{ borderRadius: "10px" }}
-      />
+      <div style={{ position: "relative", display: "inline-block", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--surface-border)" }}>
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          width="640"
+          height="480"
+          style={{ display: "block", objectFit: "cover" }}
+        />
+        <div style={{ position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.8)", padding: "0.5rem 1rem", borderRadius: "20px", backdropFilter: "blur(4px)", border: "1px solid var(--surface-border)" }}>
+          <span style={{ color: "var(--text-main)", fontWeight: 500 }}>Live: <span style={{ color: "var(--primary)" }}>{liveEmotion}</span></span>
+        </div>
+      </div>
 
-      <br /><br />
+      <div style={{ marginTop: "2rem" }}>
+        <button className="btn-primary" onClick={captureEmotion} style={{ fontSize: "1.1rem" }}>
+          Capture Emotion
+        </button>
+      </div>
 
-      <button onClick={captureEmotion}>Capture</button>
-
-      <h3>Live Emotion: {liveEmotion}</h3>
-
-      <h1>Captured Emotion: {capturedEmotion}</h1>
+      {capturedEmotion && (
+        <div style={{ marginTop: "1.5rem" }}>
+          <h3 style={{ margin: 0, color: "var(--text-muted)", fontSize: "1rem" }}>Currently Captured</h3>
+          <h1 style={{ margin: "0.5rem 0 0", color: "var(--primary)", textTransform: "capitalize", fontSize: "2rem" }}>{capturedEmotion}</h1>
+        </div>
+      )}
     </div>
   );
 };

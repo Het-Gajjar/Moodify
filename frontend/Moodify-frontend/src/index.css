@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #8fbc8f; /* Soft sage green */
+  --primary-hover: #7ba87b;
+  --secondary: #9ca3af; /* Neutral gray */
+  --background: #f9fafb; /* Off-white background */
+  
+  --surface: #ffffff; /* Solid white */
+  --surface-hover: #f3f4f6;
+  --surface-border: #e5e7eb;
+  
+  --text-main: #1f2937; /* Dark charcoal */
+  --text-muted: #6b7280;
+  
+  --font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--background);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500; /* Lighter font weights for simple look */
+  letter-spacing: -0.01em;
+}
+
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Global Styling & Variables */
