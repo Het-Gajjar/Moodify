@@ -15,21 +15,25 @@ export const Home = () => {
 
   return (
     <div className="app-container">
-      <h1 className="heading-title" style={{ marginTop: 0 }}>Moodify</h1>
-      
-      <div className="glass-panel" style={{ maxWidth: "800px", marginBottom: "2rem" }}>
-        <FaceEmotion onCapture={handleCapture} />
-      </div>
+      <h1 className="heading-title">Moodify</h1>
 
-      <h2 className="heading-subtitle">Now Playing</h2>
+      <div className="home-row">
+        <div className="glass-panel home-panel">
+          <h2 className="section-title">Camera Capture</h2>
+          <FaceEmotion onCapture={handleCapture} />
+        </div>
 
-      <div style={{ width: "100%", maxWidth: "500px" }}>
-        <Player
-          title={song?.[0]?.title || "No song selected"}
-          src={song?.[0]?.songurl || ""}
-        />
+        <div className="glass-panel home-panel">
+          <h2 className="section-title">Now Playing</h2>
+          <div className="player-wrapper">
+            <Player
+              title={song?.[0]?.title || "No song selected"}
+              src={song?.[0]?.songurl || ""}
+              image={song?.[0]?.posterurl}
+            />
+          </div>
+        </div>
       </div>
-      {/* {console.log(song?.[0]?.title )} */}
     </div>
   );
 };

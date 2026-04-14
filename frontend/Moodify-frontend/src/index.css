@@ -1,18 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #8fbc8f; /* Soft sage green */
-  --primary-hover: #7ba87b;
-  --secondary: #9ca3af; /* Neutral gray */
-  --background: #f9fafb; /* Off-white background */
-  
+  --primary: #0c4a6e;
+  --primary-hover: #0b5e8a;
+  --secondary: #475569; /* Neutral gray */
+  --background: #f8fafc; /* Soft light background */
   --surface: #ffffff; /* Solid white */
-  --surface-hover: #f3f4f6;
-  --surface-border: #e5e7eb;
-  
-  --text-main: #1f2937; /* Dark charcoal */
-  --text-muted: #6b7280;
-  
+  --surface-hover: #e2e8f0;
+  --surface-border: #cbd5e1;
+  --text-main: #0f172a; /* Dark charcoal */
+  --text-muted: #475569;
+  --button-text: #ffffff;
+  --button-bg: var(--primary);
+  --button-bg-hover: var(--primary-hover);
+  --button-border: transparent;
+  --toggle-bg: #ffffff;
+  --toggle-text: #0f172a;
   --font-family: 'Outfit', system-ui, -apple-system, sans-serif;
 }
 
@@ -51,7 +54,11 @@ button {
   border: none;
   background: none;
   color: var(--text-main);
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 a {
@@ -64,4 +71,45 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Global Styling & Variables */
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  background: var(--background);
+  color: var(--text-main);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  background: var(--toggle-bg);
+  color: var(--toggle-text);
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+  font-weight: 600;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+:root[data-theme='dark'] {
+  --primary: #34d399;
+  --primary-hover: #2aa179;
+  --secondary: #94a3b8;
+  --background: #020617;
+  --surface: #111827;
+  --surface-hover: #182235;
+  --surface-border: #334155;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --button-text: #ffffff;
+  --button-bg: #34d399;
+  --button-bg-hover: #2aa179;
+  --button-border: transparent;
+  --toggle-bg: #0f172a;
+  --toggle-text: #f8fafc;
+}

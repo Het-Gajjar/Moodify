@@ -1,31 +1,35 @@
 .glass-panel {
   background: var(--surface);
   border: 1px solid var(--surface-border);
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  padding: clamp(1.5rem, 5vw, 3rem);
   width: 100%;
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: #fff;
-  padding: 0.5rem 1.25rem;
-  border-radius: 6px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
   font-weight: 500;
   font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--button-border);
 }
 
 .btn-primary:hover {
-  background: var(--primary-hover);
+  background: var(--button-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:active {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 .btn-icon {
@@ -86,14 +90,35 @@ select.custom-select {
   background: var(--surface);
   color: var(--text-main);
   border: 1px solid var(--surface-border);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   font-family: var(--font-family);
   outline: none;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+select.custom-select:hover {
+  border-color: var(--primary);
+  background: var(--surface-hover);
 }
 
 select.custom-select option {
   background: var(--surface);
   color: var(--text-main);
+}
+
+.player-cover {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.player-cover-image {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }

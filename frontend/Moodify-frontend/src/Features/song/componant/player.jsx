@@ -8,7 +8,7 @@ const formatTime = (seconds) => {
   return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 };
 
-const Player = ({ src, title = "Track" }) => {
+const Player = ({ src, title = "Track", image }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -41,6 +41,24 @@ const Player = ({ src, title = "Track" }) => {
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("ended", onEnded);
     };
+  }, [src]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!src) {
+      setIsPlaying(false);
+      return;
+    }
+
+    audio.currentTime = 0;
+    audio.play()
+      .then(() => setIsPlaying(true))
+      .catch(() => {
+        // Autoplay may be blocked if the user has not interacted with the page
+        setIsPlaying(false);
+      });
   }, [src]);
 
   useEffect(() => {
@@ -89,6 +107,12 @@ const Player = ({ src, title = "Track" }) => {
 
   return (
     <div className="glass-panel" style={{ padding: "1.5rem" }}>
+      {image ? (
+        <div className="player-cover">
+          <img src={image} alt={title} className="player-cover-image" />
+        </div>
+      ) : null}
+
       <div style={{ marginBottom: "1.5rem", textAlign: "center" }}>
         <h3 style={{ margin: 0, fontSize: "1.25rem", color: "var(--secondary)" }}>
           {title}

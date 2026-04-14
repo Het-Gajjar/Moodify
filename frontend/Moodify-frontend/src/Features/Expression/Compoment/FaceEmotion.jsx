@@ -74,12 +74,12 @@ const FaceEmotion = ({ onCapture }) => {
         const sad =
           getScore("mouthFrownLeft") + getScore("mouthFrownRight");
 
-        let detectedEmotion = "Neutral";
+        let detectedEmotion = "sad";
 
-        if (smile > 0.8) detectedEmotion = "happy";
+        if (smile > 1) detectedEmotion = "happy";
         else if (mouthOpen > 0.6 && browRaise > 0.6)
           detectedEmotion = "surpised";
-        else if (sad > 0.05) detectedEmotion = "Sad";
+        else if (sad > 0.01) detectedEmotion = "Sad";
 
         setLiveEmotion(detectedEmotion);
       }
@@ -94,33 +94,33 @@ const FaceEmotion = ({ onCapture }) => {
   };
 
   return (
-    <div style={{ textAlign: "center", width: "100%" }}>
-      <h2 style={{ marginBottom: "1rem", color: "var(--text-main)", fontWeight: 500 }}>Detection Camera</h2>
+    <div className="face-emotion-container">
+      <h2 className="detection-title">Detection Camera</h2>
 
-      <div style={{ position: "relative", display: "inline-block", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--surface-border)" }}>
+      <div className="camera-container">
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          width="640"
-          height="480"
-          style={{ display: "block", objectFit: "cover" }}
+          className="video-preview"
         />
-        <div style={{ position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.8)", padding: "0.5rem 1rem", borderRadius: "20px", backdropFilter: "blur(4px)", border: "1px solid var(--surface-border)" }}>
-          <span style={{ color: "var(--text-main)", fontWeight: 500 }}>Live: <span style={{ color: "var(--primary)" }}>{liveEmotion}</span></span>
+        <div className="emotion-live-badge">
+          <span className="badge-text">
+            Live: <span className="emotion-name">{liveEmotion}</span>
+          </span>
         </div>
       </div>
 
-      <div style={{ marginTop: "2rem" }}>
-        <button className="btn-primary" onClick={captureEmotion} style={{ fontSize: "1.1rem" }}>
+      <div className="action-area">
+        <button className="btn-primary highlight" onClick={captureEmotion}>
           Capture Emotion
         </button>
       </div>
 
       {capturedEmotion && (
-        <div style={{ marginTop: "1.5rem" }}>
-          <h3 style={{ margin: 0, color: "var(--text-muted)", fontSize: "1rem" }}>Currently Captured</h3>
-          <h1 style={{ margin: "0.5rem 0 0", color: "var(--primary)", textTransform: "capitalize", fontSize: "2rem" }}>{capturedEmotion}</h1>
+        <div className="captured-result">
+          <h3 className="result-label">Currently Captured</h3>
+          <h1 className="result-value">{capturedEmotion}</h1>
         </div>
       )}
     </div>

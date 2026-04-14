@@ -11,8 +11,8 @@ export const useSong = () => {
   async function handlesong(mood) {
     try {
       const response = await getsong({ mood });
-      console.log(response.data.song);
-      setsong(response.data.song);
+      console.log(response.song);
+      setsong(response.song);
     } catch (error) {
       console.log(error);
     }
