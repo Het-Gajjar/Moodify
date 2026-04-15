@@ -13,6 +13,14 @@ function App() {
   const toggleTheme = () => {
     setTheme((current) => (current === 'light' ? 'dark' : 'light'))
   }
+  useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    fetch(`${API_URL}/api`)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <div className="app-shell">
