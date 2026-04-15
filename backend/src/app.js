@@ -14,6 +14,10 @@ app.use(cors({
 }));
 connectToDb()
 
+app.get("/", (req, res) => {
+  res.send("Backend working 🚀");
+});
+
 app.use('/api/auth', AuthRouter)
 app.use('/api/song', SongRouter)
 
