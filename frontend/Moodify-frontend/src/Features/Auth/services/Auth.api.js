@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: "localhost:3000/api/auth",
+    baseURL: "https://moodify2-x46z.onrender.com/api/auth",
     withCredentials: true
 })
 
